@@ -1,0 +1,66 @@
+A Kafka server, a Kafka broker and a Kafka node all refer to the same concept and are synonyms 
+(see the scaladoc of KafkaServer)
+A Kafka broker is modelled as KafkaServer that hosts topics.
+	
+Given topics are always partitioned across brokers in a cluster a single broker hosts topic partitions
+ of one or more topics actually
+(even when a topic is only partitioned to just a single partition).
+	
+A broker is an individual person who arranges transactions between a buyer and a seller for a commission
+ when the deal is executed.
+	
+.........................
+
+https://jaceklaskowski.gitbooks.io/apache-kafka/content/kafka-brokers.html
+
+A Kafka broker receives messages from producers and stores them on disk keyed by unique offset.
+A Kafka broker allows consumers to fetch messages by topic, partition and offset.
+Kafka brokers can create a Kafka cluster by sharing information between each other directly or indirectly
+ using Zookeeper.
+
+A Kafka cluster has exactly one broker that acts as the Controller.
+You can start a single Kafka broker using kafka-server-start.sh script.
+
+................................................................
+
+ I am using kafka-python to communicate with Kafka.
+#Producer.py
+from kafka import KafkaProducer
+import json
+producer = KafkaProducer(bootstrap_servers='localhost:9092',value_serializer=lambda v: json.dumps(v).encode('utf-8'))
+producer.send('offering_new', {"dataObjectID": "test1"})
+
+#Consumer.py
+import json
+from kafka import KafkaConsumer
+consumer = KafkaConsumer(bootstrap_servers='localhost:9092',auto_offset_reset='earliest', value_deserializer=lambda m: json.loads(m.decode('utf-8')))
+consumer.subscribe(['offering_new'])
+for message in consumer :
+    print(message)
+	
+.................................
+Many libraries exist in python to create producer and consumer to build a messaging system using Kafka.
+python3-kafka is used in this tutorial to read data from Kafka
+
+..........................
+
+collecting ---------length of each partition is : 1
+Offset: 2499
+Offset: 2500
+Offset: 2501
+Offset: 2502
+Offset: 2503
+Offset: 2504
+Offset: 2505
+Offset: 2506
+Offset: 2507
+Offset: 2508
+Offset: 2509
+Offset: 2510
+Offset: 2511
+Offset: 2512
+Offset: 2513
+Offset: 2514
+Offset: 2515
+Offset: 2516
+Offset: 2517

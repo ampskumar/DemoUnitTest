@@ -1,0 +1,188 @@
+1)Caching:
+https://www.ironistic.com/insights/four-major-caching-types-and-their-differences/ (types of caching)
+https://restfulapi.net/caching/#:~:text=Caching%20is%20the%20ability%20to,the%20service%20hosting%20the%20resource. (REST api caching)
+
+who is giri is davaleshwar uncle son, davaleshwar annan maga mallu
+
+[4:14 PM] Divyamadhuri Vajragiri
+    str1 = "Today is Monday Today is Tuesday Today is Wednesday"
+
+1)recent complex test case u hv cm across
+2)which is the most toughest or critical part you have handled
+3)what is super() in python, can you give an example
+
+....................oops...............
+
+what is init in python
+what is super() in python, can you give an example
+what are different types of inheritance
+write a class class method, static, instance and init method
+
+.........................Infineon...................
+1)what is diff between iterator and generator
+2)what is lambda add 2 nums
+3)what is decorator
+4)write a class class method, static, instance and init method
+
+
+Explain REST API architecture
+
+82) What are the different data types supported in python
+integer,string,float and complex are the supported data types in python
+
+ What is pickling and unpickling?
+
+83) What is MRO in python
+Method Resolution order is used in inheritance concepts
+where class is inheriting multiple class and in all the parent class, same method is defined.
+Child class is confused which method to call during run time. So the MRO helps to resolve the issue.
+
+79) What is pass in python.
+pass means no operation to be done
+.....................................................................
+
+https://www.interviewbit.com/python-interview-questions/#what-are-decorators-in-python
+https://www.interviewbit.com/python-interview-questions/#scope-in-python
+https://www.interviewbit.com/python-interview-questions/#scope-resolution-in-python
+https://www.interviewbit.com/python-interview-questions/#what-is-lambda-function-in-python-and-why-is-it-used
+https://www.interviewbit.com/python-interview-questions/#copy-in-python
+https://www.interviewbit.com/python-interview-questions/#how-are-arguments-passed-by-value-or-by-reference-in-python
+https://www.interviewbit.com/python-interview-questions/#are-access-specifiers-used-in-python
+
+.......................................
+
+How is memory managed in python
+
+what are dunders
+
+difference between list and tupl
+
+what is namespace
+what are exceptions
+what are decorators
+......................................................
+difference between smoke and sanity testing
+.................................
+
+api_key
+
++TLCAM01038BT01039AWCH+
+
+....................................Pytest............................
+
+The best way is to have a dedicated Python file where you can add multiple test cases to execute.
+There are different ways to execute the test cases.
+1. Execute all test cases from all the Python files in the given directory.
+pytest
+2. Execute all the test cases from the given Python file name.
+pytest <file_name>
+3. Execute specific testcase from the given Python file.
+pytest <file_name>::<test_case>
+
+...................................
+
+Here are two basic rules you should remember while writing test cases.
+1. Testcase function should start with the keyword test_.
+2. Python file name should start with test_ or end with _test.
+
+..............................Status codes...................................
+401 Unauthorized is the status code to return when the client provides no credentials or invalid credentials. 
+403 Forbidden is the status code to return when a client has valid credentials but not enough privileges to 
+	perform an action on a resource.
+
+...............................Django................................
+
+46. Explain Django Security.
+Protecting user's data is an essential part of any website design. Django implements various sufficient protections against several common threats. The following are Django's security features:
+
+Cross-site scripting (XSS) protection
+SQL injection protection
+Cross-site request forgery (CSRF) protection
+Enforcing SSL/HTTPS
+Session security
+Clickjacking protection
+Host header validation
+
+........................
+
+42. Explain user authentication in Django
+Django comes with a built-in user authentication system to handle objects such as users, groups, permissions, etc. It not only performs authentication but authorization as well. 
+
+Following are the system objects:
+
+users
+Groups
+Password Hashing System
+Permissions
+A pluggable backend system
+Forms Validation
+Apart from this, there are various third-party web apps that we can use instead of the default system to provide more user authentication with more features.
+
+......................................
+What is Scope in Python?
+Python is what type of language programming or scripting?
+State some benefits of using Python as a programming language?
+How to convert a list into a string?
+How to count the occurrences of a particular element in the list?
+What is type conversion in Python?
+What are global, protected, and private attributes in Python?
+
+def get_qvt_urls(channel_id, no_of_days=1):
+    url = "https://GetScheduleTilesV1"
+    tod = datetime.datetime.now()
+    target_time = tod.strftime('%Y-%m-%dT%H:%M:%SZ')
+
+    today = datetime.datetime.now()
+    d = datetime.timedelta(days=no_of_days)
+    a = today + d
+    end_time = a.strftime('%Y-%m-%dT%H:%M:%SZ')
+
+    query = {
+        "channel_ids": [str(channel_id)],
+        "target_time": target_time,
+        "end_time": end_time
+    }
+
+    payload: str = json.dumps(query)
+    # import ipdb;
+    # ipdb.set_trace()
+    response = requests.post(
+        url,
+        data=payload
+    )
+
+    # try:
+    data = response.json()["schedules"][str(channel_id)]["schedule_list"]
+    # data = response.json()["schedules"]
+    final_qvt_url = []
+    for i in data:
+        final_qvt_url.append(i['qvt_url'])
+    return final_qvt_url
+    # except Exception as e:
+    #     print(e)
+
+
+def get_qvt_interim_urls(channel_id, no_of_days=1):
+    today = datetime.datetime.now()
+    d = datetime.timedelta(days=no_of_days)
+    a = today + d
+    end_time = a.strftime('%Y-%m-%d')
+    url = "http://b-delivery-api.movetv.com/cc/schedule/%s/%s" % (channel_id, end_time)
+
+    response = requests.get(
+        url
+    )
+    data = response.json()["schedule"]["scheduleList"]
+    final_qvt_url = []
+    for i in data:
+        final_qvt_url.append(i['qvt_url'])
+    return final_qvt_url
+
+
+
+......................................
+HTTP Status Code 500 - Internal Server Error
+Instead of the problem being with pages missing or not found, this status code indicates a problem with the server. A 500 is a classic server error and will affect access to your site. Human visitors and bots alike will be lost, and your link equity will go nowhere fast. Search engines prefer sites that are well maintained, so you’ll want to investigate these status codes and get these fixed as soon as you encounter them.
+
+HTTP Status Code 503 - Service Unavailable
+Another variety of the 500, a 503 response means that the server is unavailable. Everyone (human or otherwise) is asked to come back later. This could be due to temporarily overloading the server or maintenance of the server. A 503 status code ensures that the search engines know to come back soon because the page or site is only going to be down for a short time.

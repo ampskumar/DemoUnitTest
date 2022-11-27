@@ -1,0 +1,49 @@
+
+https://antoniodimariano.medium.com/how-a-kafka-consumer-can-start-reading-messages-from-a-different-offset-and-get-back-to-the-start-eee28dc19428
+
+How Kafka consumers can start reading messages from a different offset and get back to the start.
+
+
+....................................................
+
+Kafka-python How to consume json message:
+
+With auto_offset_reset='earliest' you have configured your consumer to read all messages in the topic. 
+A JSON decoding error suggests that some message that was previously produced to the topic is not actually in JSON format.
+
+Some solutions:
+
+(1) consume from the tail of the topic instead: auto_offset_reset='latest'
+
+(2) start a new topic: consumer.subscribe(['offering_new_too'])
+
+(3) use a more comprehensive deserializer:
+
+def forgiving_json_deserializer(v):
+    return if v is None
+    try:
+        return json.loads(v.decode('utf-8'))
+    except json.decoder.JSONDecodeError:
+        log.exception('Unable to decode: %s', v)
+        return None
+
+KafkaConsumer(value_deserializer=forgiving_json_deserializer, ...)
+
+.......................kafka offsets...............................
+
+If we want to move to the most recent offset for my partition
+self.consumer.seek_to_end(self.mypartition)
+
+I can have the new or current position, using the position() API
+pos = self.consumer.position(self.mypartition) 
+print("[most recent offset]=", pos)
+
+If I want to go back to the beginning I can use,
+self.consumer.seek_to_beginning(self.mypartition)
+
+which seeks to the oldest offset available in the partition.
+If I want go to a given offset
+self.consumer.seek(self.mypartition, new_pos)
+
+
+...

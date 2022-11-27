@@ -1,0 +1,296 @@
+
+
+
+..........................................................
+print(msg.value) # <class 'bytes'> b'some data here can be any python object here like list,tuple,dcit,str type'
+ipdb> abs=value='[{"a":1}]'
+ipdb> ast.literal_eval(abs)
+[{'a': 1}]
+ipdb> abs=msg.value.decode()
+ipdb> ast.literal_eval(abs)
+*** ValueError: malformed node or string: <_ast.Name object at 0x000001E56397F5E0>
+1)I tried 
+	abs=msg.value.decode() gives '[{"a":1}]' but I want list object so i did,
+2)ast.literal_eval(abs)
+You should not use ast.literal_eval() on JSON data. JSON and Python literals may look like the same thing, but they are very much not.
+
+
+if <class 'bytes'> 
+json.loads(msg.value) #msg.value is in byte i.e b'multilevel or deep inner python data structures i.e sequence types or seems json type'
+now it gives actual python data structure s(here list) removing byte or string representation.
+
+
+(venv) C:\workspace\gracenote-ingestion-integration-test\tests\kafka_tests>python kafka_consumer.py
+ConsumerRecord(topic='supair.offerings.sling', partition=0, offset=0, timestamp=1632348894635, timestamp_type=0, key=b'19616_2021-09-23', value=b'[{"vendor_chann
+el": "19616", "vendor_channel_day": "19616_2021-09-23", "offerings": [{"vendor_channel": "19616", "offering_id": "19616_2021-09-23T23:30:00Z_EP001152648565", "ve
+ndor": "gn", "offering_type": "linear", "start": "2021-09-23T23:30:00Z", "stop": "2021-09-24T00:00:00Z", "duration": 1800, "is_new_airing": true, "is_live": fals
+e, "price": 0.0, "media_url": null, "last_modified": "2021-09-22T22:01:56Z", 
+"program": { 
+                "action": "UPD", "program_id": "EP001152648565", "rovi_id": null, "echos
+		tar_id": null, "title": "Extra",  "episode_number": "16", "series_sequence": 1894,
+ 		"season_title": "Extra","season_number": "28", "original_air_date": "2021-09-23",
+ 		"release_year":"2021", "language": "en", "provider_update_id": "4008689432"
+	   }
+}]}]',headers=[], checksum=None, serialized_key_size=16, serialized_value_size=5088, serialized_header_size=-1)
+<class 'kafka.consumer.fetcher.ConsumerRecord'>
+---------------..................
+
+if <class 'bytes'> 
+json.loads(msg.value) #msg.value is in byte i.e b'multilevel or deep inner python data structures i.e sequence types or seems json type'
+now it gives actual python data structure s(here list) removing byte or string representation.
+
+(venv) C:\workspace\gracenote-ingestion-integration-test\tests\kafka_tests>python kafka_consumer.py
+supair.offerings.sling
+<class 'kafka.consumer.fetcher.ConsumerRecord'>
+-------------------------------------
+ 
+very imp:
+
+https://stackoverflow.com/questions/32695699/valueerror-malformed-string-using-ast-literal-eval
+
+You should not use ast.literal_eval() on JSON data. JSON and Python literals may look like the same thing, but they are very much not.
+
+	In this case, your data contains a boolean flag, set to false in JSON. A proper Python boolean uses title-case, so False:
+
+>>> import json, ast
+>>> s = '{"no_sell_or_sort": false, "size": 20}'
+>>> json.loads(s)
+{u'no_sell_or_sort': False, u'size': 20}
+>>> ast.literal_eval(s)
+Traceback (most recent call last):
+  File "<stdin>", line 1, in <module>
+  File "/Users/mj/Development/Library/buildout.python/parts/opt/lib/python2.7/ast.py", line 80, in literal_eval
+    return _convert(node_or_string)
+  File "/Users/mj/Development/Library/buildout.python/parts/opt/lib/python2.7/ast.py", line 63, in _convert
+    in zip(node.keys, node.values))
+  File "/Users/mj/Development/Library/buildout.python/parts/opt/lib/python2.7/ast.py", line 62, in <genexpr>
+    return dict((_convert(k), _convert(v)) for k, v
+  File "/Users/mj/Development/Library/buildout.python/parts/opt/lib/python2.7/ast.py", line 79, in _convert
+    raise ValueError('malformed string')
+ValueError: malformed string
+...........................................
+
+(venv) C:\workspace\gracenote-ingestion-integration-test\tests\kafka_tests>python kafka_consumer.py
+Traceback (most recent call last):
+  File "kafka_consumer.py", line 11, in <module>
+    if 'program' in msg.offerings[0].keys():
+AttributeError: 'ConsumerRecord' object has no attribute 'offerings'
+
+(venv) C:\workspace\gracenote-ingestion-integration-test\tests\kafka_tests>oython kafka_consumer.py
+'oython' is not recognized as an internal or external command,
+operable program or batch file.
+
+(venv) C:\workspace\gracenote-ingestion-integration-test\tests\kafka_tests>python kafka_consumer.py
+Traceback (most recent call last):
+  File "kafka_consumer.py", line 11, in <module>
+    if 'program' in msg.value[0].offerings[0].keys():
+AttributeError: 'int' object has no attribute 'offerings'
+
+(venv) C:\workspace\gracenote-ingestion-integration-test\tests\kafka_tests>python kafka_consumer.py
+91
+
+(venv) C:\workspace\gracenote-ingestion-integration-test\tests\kafka_tests>python kafka_consumer.py  #printing msg.value msg is each record by consumer
+<class 'bytes'> b'[{"vendor_channel": "19616", "vendor_channel_day": "19616_2021-09-23", "offerings": [{"vendor_channel": "19616", "offering_id": "19616_2021-09-
+23T23:30:00Z_EP001152648565", "vendor": "gn", "offering_type": "linear", "start": "2021-09-23T23:30:00Z", "stop": "2021-09-24T00:00:00Z", "duration": 1800, "is_n
+ew_airing": true, "is_live": false, "price": 0.0, "media_url": null, "last_modified": "2021-09-22T22:01:56Z", "program": {"action": "UPD", "program_id": "EP00115
+2648565", "rovi_id": null, "echostar_id": null, "title": "Extra", "sub_title": null, "description": "An interview with Billy Bob Thornton (\\"Goliath\\"); the pr
+emiere of the new \\"Sopranos\\" movie.", "short_description": "An interview with Billy Bob Thornton (\\"Goliath\\"); the premiere of the new \\"Sopranos\\" movi
+e.", "type": "episode", "sub_type": "Episode", "credits": [{"order": 1, "role_name": null, "role_type": "Host", "credit_name": "Billy Bush", "tms_person_id": "26
+1959"}, {"order": 2, "role_name": null, "role_type": "Correspondent", "credit_name": "Jennifer Lahmers", "tms_person_id": "1280156"}, {"order": 3, "role_name": n
+ull, "role_type": "Correspondent", "credit_name": "Rachel Lindsay", "tms_person_id": "1038375"}, {"order": 4, "role_name": null, "role_type": "Correspondent", "c
+redit_name": "Nate Burleson", "tms_person_id": "907579"}, {"order": 5, "role_name": null, "role_type": "Correspondent", "credit_name": "Cheslie Kryst", "tms_pers
+on_id": "1248396"}, {"order": 6, "role_name": null, "role_type": "Guest", "credit_name": "Billy Bob Thornton", "tms_person_id": "8418"}], "ratings": {"rating_bod
+y": "USA Parental Rating", "rating": "TVPG"}, "episode_number": "16", "series_sequence": 1894, "season_title": "Extra", "season_number": "28", "original_air_date
+": "2021-09-23", "release_year": "2021", "language": "en", "provider_update_id": "4008689432", "genres": ["Entertainment", "Newsmagazine"], "sports_info": [], "s
+eries": {"series_id": "gn_SH001152640000", "series_title": "Extra", "series_sub_type": "Series", "series_type": "series", "series_description": "Inside the enter
+tainment newsgathering process, as reporters coast to coast break headlines, advance the stories of the day, and sit down with celebrities.", "series_short_descr
+iption": "Breaking headlines, the stories of the day, and interviews with celebrities.", "series_credits": [{"order": 1, "role_name": null, "role_type": "Host",
+"credit_name": "Billy Bush", "tms_person_id": "261959"}, {"order": 2, "role_name": null, "role_type": "Correspondent", "credit_name": "Jennifer Lahmers", "tms_pe
+rson_id": "1280156"}, {"order": 3, "role_name": null, "role_type": "Correspondent", "credit_name": "Rachel Lindsay", "tms_person_id": "1038375"}, {"order": 4, "r
+ole_name": null, "role_type": "Correspondent", "credit_name": "Nate Burleson", "tms_person_id": "907579"}, {"order": 5, "role_name": null, "role_type": "Correspo
+ndent", "credit_name": "Cheslie Kryst", "tms_person_id": "1248396"}, {"order": 6, "role_name": null, "role_type": "Correspondent", "credit_name": "Renee Bargh",
+"tms_person_id": "769501"}, {"order": 7, "role_name": null, "role_type": "Correspondent", "credit_name": "Jana Kramer", "tms_person_id": "330830"}, {"order": 8,
+"role_name": null, "role_type": "Correspondent", "credit_name": "Charissa Thompson", "tms_person_id": "553962"}, {"order": 9, "role_name": null, "role_type": "Ho
+st", "credit_name": "Mario L\\u00f3pez", "tms_person_id": "77758"}, {"order": 10, "role_name": null, "role_type": "Host", "credit_name": "Tanika Ray", "tms_perso
+n_id": "414695"}, {"order": 11, "role_name": null, "role_type": "Correspondent", "credit_name": "Jerry Penacoli", "tms_person_id": "266712"}, {"order": 12, "role
+_name": null, "role_type": "Correspondent", "credit_name": "Michael Corbett", "tms_person_id": "190398"}, {"order": 13, "role_name": null, "role_type": "Correspo
+ndent", "credit_name": "Mark Wright", "tms_person_id": "87949"}, {"order": 14, "role_name": null, "role_type": "Correspondent", "credit_name": "Terri Seymour", "
+tms_person_id": "422789"}, {"order": 15, "role_name": null, "role_type": "Correspondent", "credit_name": "Hilaria Baldwin", "tms_person_id": "688020"}, {"order":
+ 16, "role_name": null, "role_type": "Host", "credit_name": "A.J. Calloway", "tms_person_id": "562365"}, {"order": 17, "role_name": null, "role_type": "Host", "c
+redit_name": "Tracey Edmonds", "tms_person_id": "361428"}, {"order": 18, "role_name": null, "role_type": "Host", "credit_name": "Maria Menounos", "tms_person_id"
+: "303142"}, {"order": 19, "role_name": null, "role_type": "Correspondent", "credit_name": "Jeannie Mai", "tms_person_id": "550993"}, {"order": 20, "role_name":
+null, "role_type": "Correspondent", "credit_name": "Lauren Sanchez", "tms_person_id": "321609"}, {"order": 21, "role_name": null, "role_type": "Correspondent", "
+credit_name": "Ben Lyons", "tms_person_id": "518602"}, {"order": 22, "role_name": null, "role_type": "Host", "credit_name": "Dayna Devon", "tms_person_id": "2942
+93"}, {"order": 23, "role_name": null, "role_type": "Host", "credit_name": "Mark McGrath", "tms_person_id": "331516"}]}}}]}]'
+
+(venv) C:\workspace\gracenote-ingestion-integration-test\tests\kafka_tests>python kafka_consumer.py
+<class 'bytes'> b'[{"vendor_channel": "19616", "vendor_channel_day": "19616_2021-09-23", "offerings": [{"vendor_channel": "19616", "offering_id": "19616_2021-09-
+23T23:30:00Z_EP001152648565", "vendor": "gn", "offering_type": "linear", "start": "2021-09-23T23:30:00Z", "stop": "2021-09-24T00:00:00Z", "duration": 1800, "is_n
+ew_airing": true, "is_live": false, "price": 0.0, "media_url": null, "last_modified": "2021-09-22T22:01:56Z", "program": {"action": "UPD", "program_id": "EP00115
+2648565", "rovi_id": null, "echostar_id": null, "title": "Extra", "sub_title": null, "description": "An interview with Billy Bob Thornton (\\"Goliath\\"); the pr
+emiere of the new \\"Sopranos\\" movie.", "short_description": "An interview with Billy Bob Thornton (\\"Goliath\\"); the premiere of the new \\"Sopranos\\" movi
+e.", "type": "episode", "sub_type": "Episode", "credits": [{"order": 1, "role_name": null, "role_type": "Host", "credit_name": "Billy Bush", "tms_person_id": "26
+1959"}, {"order": 2, "role_name": null, "role_type": "Correspondent", "credit_name": "Jennifer Lahmers", "tms_person_id": "1280156"}, {"order": 3, "role_name": n
+ull, "role_type": "Correspondent", "credit_name": "Rachel Lindsay", "tms_person_id": "1038375"}, {"order": 4, "role_name": null, "role_type": "Correspondent", "c
+redit_name": "Nate Burleson", "tms_person_id": "907579"}, {"order": 5, "role_name": null, "role_type": "Correspondent", "credit_name": "Cheslie Kryst", "tms_pers
+on_id": "1248396"}, {"order": 6, "role_name": null, "role_type": "Guest", "credit_name": "Billy Bob Thornton", "tms_person_id": "8418"}], "ratings": {"rating_bod
+y": "USA Parental Rating", "rating": "TVPG"}, "episode_number": "16", "series_sequence": 1894, "season_title": "Extra", "season_number": "28", "original_air_date
+": "2021-09-23", "release_year": "2021", "language": "en", "provider_update_id": "4008689432", "genres": ["Entertainment", "Newsmagazine"], "sports_info": [], "s
+eries": {"series_id": "gn_SH001152640000", "series_title": "Extra", "series_sub_type": "Series", "series_type": "series", "series_description": "Inside the enter
+tainment newsgathering process, as reporters coast to coast break headlines, advance the stories of the day, and sit down with celebrities.", "series_short_descr
+iption": "Breaking headlines, the stories of the day, and interviews with celebrities.", "series_credits": [{"order": 1, "role_name": null, "role_type": "Host",
+"credit_name": "Billy Bush", "tms_person_id": "261959"}, {"order": 2, "role_name": null, "role_type": "Correspondent", "credit_name": "Jennifer Lahmers", "tms_pe
+rson_id": "1280156"}, {"order": 3, "role_name": null, "role_type": "Correspondent", "credit_name": "Rachel Lindsay", "tms_person_id": "1038375"}, {"order": 4, "r
+ole_name": null, "role_type": "Correspondent", "credit_name": "Nate Burleson", "tms_person_id": "907579"}, {"order": 5, "role_name": null, "role_type": "Correspo
+ndent", "credit_name": "Cheslie Kryst", "tms_person_id": "1248396"}, {"order": 6, "role_name": null, "role_type": "Correspondent", "credit_name": "Renee Bargh",
+"tms_person_id": "769501"}, {"order": 7, "role_name": null, "role_type": "Correspondent", "credit_name": "Jana Kramer", "tms_person_id": "330830"}, {"order": 8,
+"role_name": null, "role_type": "Correspondent", "credit_name": "Charissa Thompson", "tms_person_id": "553962"}, {"order": 9, "role_name": null, "role_type": "Ho
+st", "credit_name": "Mario L\\u00f3pez", "tms_person_id": "77758"}, {"order": 10, "role_name": null, "role_type": "Host", "credit_name": "Tanika Ray", "tms_perso
+n_id": "414695"}, {"order": 11, "role_name": null, "role_type": "Correspondent", "credit_name": "Jerry Penacoli", "tms_person_id": "266712"}, {"order": 12, "role
+_name": null, "role_type": "Correspondent", "credit_name": "Michael Corbett", "tms_person_id": "190398"}, {"order": 13, "role_name": null, "role_type": "Correspo
+ndent", "credit_name": "Mark Wright", "tms_person_id": "87949"}, {"order": 14, "role_name": null, "role_type": "Correspondent", "credit_name": "Terri Seymour", "
+tms_person_id": "422789"}, {"order": 15, "role_name": null, "role_type": "Correspondent", "credit_name": "Hilaria Baldwin", "tms_person_id": "688020"}, {"order":
+ 16, "role_name": null, "role_type": "Host", "credit_name": "A.J. Calloway", "tms_person_id": "562365"}, {"order": 17, "role_name": null, "role_type": "Host", "c
+redit_name": "Tracey Edmonds", "tms_person_id": "361428"}, {"order": 18, "role_name": null, "role_type": "Host", "credit_name": "Maria Menounos", "tms_person_id"
+: "303142"}, {"order": 19, "role_name": null, "role_type": "Correspondent", "credit_name": "Jeannie Mai", "tms_person_id": "550993"}, {"order": 20, "role_name":
+null, "role_type": "Correspondent", "credit_name": "Lauren Sanchez", "tms_person_id": "321609"}, {"order": 21, "role_name": null, "role_type": "Correspondent", "
+credit_name": "Ben Lyons", "tms_person_id": "518602"}, {"order": 22, "role_name": null, "role_type": "Host", "credit_name": "Dayna Devon", "tms_person_id": "2942
+93"}, {"order": 23, "role_name": null, "role_type": "Host", "credit_name": "Mark McGrath", "tms_person_id": "331516"}]}}}]}]'
+> c:\workspace\gracenote-ingestion-integration-test\tests\kafka_tests\kafka_consumer.py(20)<module>()
+     18         print(type(msg))
+     19         print("---------------")
+---> 20     break
+
+ipdb> msg.value[0]
+91
+ipdb> list(msg.value[0])
+*** Error in argument: '(msg.value[0])'
+ipdb> type(msg.value[0])
+<class 'int'>
+SSipdb> type(b'msg.value[0]')
+<class 'bytes'>
+ipdb> b'msg.value[0]'
+*** The specified object "'msg.value[0]'" is not a function or was not found along sys.path.
+ipdb> type(msg.value)
+<class 'bytes'>
+ipdb> type(msg.value.decode)
+<class 'builtin_function_or_method'>
+ipdb> msg.value.decode
+<built-in method decode of bytes object at 0x000001E55FBFD6F0>
+ipdb> msg.value.decode()
+'[{"vendor_channel": "19616", "vendor_channel_day": "19616_2021-09-23", "offerings": [{"vendor_channel": "19616", "offering_id": "19616_2021-09-23T23:30:00Z_EP00
+1152648565", "vendor": "gn", "offering_type": "linear", "start": "2021-09-23T23:30:00Z", "stop": "2021-09-24T00:00:00Z", "duration": 1800, "is_new_airing": true,
+ "is_live": false, "price": 0.0, "media_url": null, "last_modified": "2021-09-22T22:01:56Z", "program": {"action": "UPD", "program_id": "EP001152648565", "rovi_i
+d": null, "echostar_id": null, "title": "Extra", "sub_title": null, "description": "An interview with Billy Bob Thornton (\\"Goliath\\"); the premiere of the new
+ \\"Sopranos\\" movie.", "short_description": "An interview with Billy Bob Thornton (\\"Goliath\\"); the premiere of the new \\"Sopranos\\" movie.", "type": "epi
+sode", "sub_type": "Episode", "credits": [{"order": 1, "role_name": null, "role_type": "Host", "credit_name": "Billy Bush", "tms_person_id": "261959"}, {"order":
+ 2, "role_name": null, "role_type": "Correspondent", "credit_name": "Jennifer Lahmers", "tms_person_id": "1280156"}, {"order": 3, "role_name": null, "role_type":
+ "Correspondent", "credit_name": "Rachel Lindsay", "tms_person_id": "1038375"}, {"order": 4, "role_name": null, "role_type": "Correspondent", "credit_name": "Nat
+e Burleson", "tms_person_id": "907579"}, {"order": 5, "role_name": null, "role_type": "Correspondent", "credit_name": "Cheslie Kryst", "tms_person_id": "1248396"
+}, {"order": 6, "role_name": null, "role_type": "Guest", "credit_name": "Billy Bob Thornton", "tms_person_id": "8418"}], "ratings": {"rating_body": "USA Parental
+ Rating", "rating": "TVPG"}, "episode_number": "16", "series_sequence": 1894, "season_title": "Extra", "season_number": "28", "original_air_date": "2021-09-23",
+"release_year": "2021", "language": "en", "provider_update_id": "4008689432", "genres": ["Entertainment", "Newsmagazine"], "sports_info": [], "series": {"series_
+id": "gn_SH001152640000", "series_title": "Extra", "series_sub_type": "Series", "series_type": "series", "series_description": "Inside the entertainment newsgath
+ering process, as reporters coast to coast break headlines, advance the stories of the day, and sit down with celebrities.", "series_short_description": "Breakin
+g headlines, the stories of the day, and interviews with celebrities.", "series_credits": [{"order": 1, "role_name": null, "role_type": "Host", "credit_name": "B
+illy Bush", "tms_person_id": "261959"}, {"order": 2, "role_name": null, "role_type": "Correspondent", "credit_name": "Jennifer Lahmers", "tms_person_id": "128015
+6"}, {"order": 3, "role_name": null, "role_type": "Correspondent", "credit_name": "Rachel Lindsay", "tms_person_id": "1038375"}, {"order": 4, "role_name": null,
+"role_type": "Correspondent", "credit_name": "Nate Burleson", "tms_person_id": "907579"}, {"order": 5, "role_name": null, "role_type": "Correspondent", "credit_n
+ame": "Cheslie Kryst", "tms_person_id": "1248396"}, {"order": 6, "role_name": null, "role_type": "Correspondent", "credit_name": "Renee Bargh", "tms_person_id":
+"769501"}, {"order": 7, "role_name": null, "role_type": "Correspondent", "credit_name": "Jana Kramer", "tms_person_id": "330830"}, {"order": 8, "role_name": null
+, "role_type": "Correspondent", "credit_name": "Charissa Thompson", "tms_person_id": "553962"}, {"order": 9, "role_name": null, "role_type": "Host", "credit_name
+": "Mario L\\u00f3pez", "tms_person_id": "77758"}, {"order": 10, "role_name": null, "role_type": "Host", "credit_name": "Tanika Ray", "tms_person_id": "414695"},
+ {"order": 11, "role_name": null, "role_type": "Correspondent", "credit_name": "Jerry Penacoli", "tms_person_id": "266712"}, {"order": 12, "role_name": null, "ro
+le_type": "Correspondent", "credit_name": "Michael Corbett", "tms_person_id": "190398"}, {"order": 13, "role_name": null, "role_type": "Correspondent", "credit_n
+ame": "Mark Wright", "tms_person_id": "87949"}, {"order": 14, "role_name": null, "role_type": "Correspondent", "credit_name": "Terri Seymour", "tms_person_id": "
+422789"}, {"order": 15, "role_name": null, "role_type": "Correspondent", "credit_name": "Hilaria Baldwin", "tms_person_id": "688020"}, {"order": 16, "role_name":
+ null, "role_type": "Host", "credit_name": "A.J. Calloway", "tms_person_id": "562365"}, {"order": 17, "role_name": null, "role_type": "Host", "credit_name": "Tra
+cey Edmonds", "tms_person_id": "361428"}, {"order": 18, "role_name": null, "role_type": "Host", "credit_name": "Maria Menounos", "tms_person_id": "303142"}, {"or
+der": 19, "role_name": null, "role_type": "Correspondent", "credit_name": "Jeannie Mai", "tms_person_id": "550993"}, {"order": 20, "role_name": null, "role_type"
+: "Correspondent", "credit_name": "Lauren Sanchez", "tms_person_id": "321609"}, {"order": 21, "role_name": null, "role_type": "Correspondent", "credit_name": "Be
+n Lyons", "tms_person_id": "518602"}, {"order": 22, "role_name": null, "role_type": "Host", "credit_name": "Dayna Devon", "tms_person_id": "294293"}, {"order": 2
+3, "role_name": null, "role_type": "Host", "credit_name": "Mark McGrath", "tms_person_id": "331516"}]}}}]}]'
+ipdb> import ast
+ipdb> type(ast.literal_eval(msg.value.decode))
+*** ValueError: malformed node or string: <built-in method decode of bytes object at 0x000001E55FBFD6F0>
+ipdb> ast.literal_eval(msg.value.decode)
+*** ValueError: malformed node or string: <built-in method decode of bytes object at 0x000001E55FBFD6F0>
+ipdb> msg.value.decode
+<built-in method decode of bytes object at 0x000001E55FBFD6F0>
+ipdb> type(ast.literal_eval(msg.value.decode()))
+*** ValueError: malformed node or string: <_ast.Name object at 0x000001E5639615B0>
+ipdb> 
+*** ValueError: malformed node or string: <_ast.Name object at 0x000001E5639DC880>
+ipdb> 
+*** ValueError: malformed node or string: <_ast.Name object at 0x000001E5639827C0>
+ipdb> 
+*** ValueError: malformed node or string: <_ast.Name object at 0x000001E5639DC100>
+ipdb> msg.value.decode()  to convert byte to string
+'[{"vendor_channel": "19616", "vendor_channel_day": "19616_2021-09-23", "offerings": [{"vendor_channel": "19616", "offering_id": "19616_2021-09-23T23:30:00Z_EP00
+1152648565", "vendor": "gn", "offering_type": "linear", "start": "2021-09-23T23:30:00Z", "stop": "2021-09-24T00:00:00Z", "duration": 1800, "is_new_airing": true,
+ "is_live": false, "price": 0.0, "media_url": null, "last_modified": "2021-09-22T22:01:56Z", "program": {"action": "UPD", "program_id": "EP001152648565", "rovi_i
+d": null, "credits": [{"order": 1, "role_name": null, "role_type": "Host", "credit_name": "Billy Bush", "tms_person_id": "261959"}, {"order":
+ 2, "role_name": null, "role_type": "Correspondent", "credit_name": "Jennifer Lahmers", "tms_person_id": "1280156"}, {"order": 3, "role_name": null, "role_type":
+ "Correspondent", "credit_name": "Rachel Lindsay", "tms_person_id": "1038375"}, {"order": 4, "role_name": null, "role_type": "Correspondent", "credit_name": "Nat
+e Burleson", "tms_person_id": "907579"}, {"order": 5, "role_name": null, "role_type": "Correspondent", "credit_name": "Cheslie Kryst", "tms_person_id": "1248396"
+}, {"order": 6, "role_name": null, "role_type": "Guest", "credit_name": "Billy Bob Thornton", "tms_person_id": "8418"}], "ratings": {"rating_body": "USA Parental
+ Rating", "rating": "TVPG"}, "episode_number": "16", "series_sequence": 1894, "season_title": "Extra", "season_number": "28", "original_air_date": "2021-09-23",
+"release_year": "2021", "language": "en", "provider_update_id": "4008689432", "genres": ["Entertainment", "Newsmagazine"], "sports_info": [], "series": {"series_
+id": "gn_SH001152640000", "series_title": "Extra", "series_sub_type": "Series", "series_type": "series", "series_description": "Inside the entertainment newsgath
+ering process, as reporters coast to coast break headlines, advance the stories of the day, and sit down with celebrities.", "series_short_description": "Breakin
+g headlines, the stories of the day, and interviews with celebrities.", "series_credits": [{"order": 1, "role_name": null, "role_type": "Host", "credit_name": "B
+illy Bush", "tms_person_id": "261959"}, {"order": 2, "role_name": null, "role_type": "Correspondent", "credit_name": "Jennifer Lahmers", "tms_person_id": "128015
+6"}, {"order": 3, "role_name": null, "role_type": "Correspondent", "credit_name": "Rachel Lindsay", "tms_person_id": "1038375"}, {"order": 4, "role_name": null,
+"role_type": "Correspondent", "credit_name": "Nate Burleson", "tms_person_id": "907579"}, {"order": 5, "role_name": null, "role_type": "Correspondent", "credit_n
+ame": "Cheslie Kryst", "tms_person_id": "1248396"}, {"order": 6, "role_name": null, "role_type": "Correspondent", "credit_name": "Renee Bargh", "tms_person_id":
+"769501"}, {"order": 7, "role_name": null, "role_type": "Correspondent", "credit_name": "Jana Kramer", "tms_person_id": "330830"}, {"order": 8, "role_name": null
+, "role_type": "Correspondent", "credit_name": "Charissa Thompson", "tms_person_id": "553962"}, {"order": 9, "role_name": null, "role_type": "Host", "credit_name
+": "Mario L\\u00f3pez", "tms_person_id": "77758"}, {"order": 10, "role_name": null, "role_type": "Host", "credit_name": "Tanika Ray", "tms_person_id": "414695"},
+ {"order": 11, "role_name": null, "role_type": "Correspondent", "credit_name": "Jerry Penacoli", "tms_person_id": "266712"}, {"order": 12, "role_name": null, "ro
+le_type": "Correspondent", "credit_name": "Michael Corbett", "tms_person_id": "190398"}, {"order": 13, "role_name": null, "role_type": "Correspondent", "credit_n
+ame": "Mark Wright", "tms_person_id": "87949"}, {"order": 14, "role_name": null, "role_type": "Correspondent", "credit_name": "Terri Seymour", "tms_person_id": "
+422789"}, {"order": 15, "role_name": null, "role_type": "Correspondent", "credit_name": "Hilaria Baldwin", "tms_person_id": "688020"}, {"order": 16, "role_name":
+ null, "role_type": "Host", "credit_name": "A.J. Calloway", "tms_person_id": "562365"}, {"order": 17, "role_name": null, "role_type": "Host", "credit_name": "Tra
+cey Edmonds", "tms_person_id": "361428"}, {"order": 18, "role_name": null, "role_type": "Host", "credit_name": "Maria Menounos", "tms_person_id": "303142"}, {"or
+der": 19, "role_name": null, "role_type": "Correspondent", "credit_name": "Jeannie Mai", "tms_person_id": "550993"}, {"order": 20, "role_name": null, "role_type"
+: "Correspondent", "credit_name": "Lauren Sanchez", "tms_person_id": "321609"}, {"order": 21, "role_name": null, "role_type": "Correspondent", "credit_name": "Be
+n Lyons", "tms_person_id": "518602"}, {"order": 22, "role_name": null, "role_type": "Host", "credit_name": "Dayna Devon", "tms_person_id": "294293"}, {"order": 2
+3, "role_name": null, "role_type": "Host", "credit_name": "Mark McGrath", "tms_person_id": "331516"}]}}}]}]'
+ipdb> import ast
+ipdb> a='[{'a':1}]'
+ipdb> ast.literal_eval(a)
+*** NameError: name 'a' is not defined
+ipdb> ab='[{'a':1}]'
+*** SyntaxError: invalid syntax
+
+ipdb> abs='[{"a":1}]'
+ipdb> ast.literal_eval(abs)
+[{'a': 1}]
+ipdb> abs=msg.value.decode()
+ipdb> ast.literal_eval(abs)
+*** ValueError: malformed node or string: <_ast.Name object at 0x000001E56397F5E0>
+ipdb> import json
+ipdb> json.loads(msg.value)
+[{'vendor_channel': '19616', 'vendor_channel_day': '19616_2021-09-23', 'offerings': [{'vendor_channel': '19616', 'offering_id': '19616_2021-09-23T23:30:00Z_EP001
+152648565',  'series_credits': [{'order': 1, 'role_name': None, 'role_type': 'Host', 'credit_name': 'Billy Bush', 'tms_
+person_id': '261959'}, {'order': 2, 'role_name': None, 'role_type': 'Correspondent', 'credit_name': 'Jennifer Lahmers', 'tms_person_id': '1280156'}, {'order': 3,
+_name':
+None, 'role_type': 'Correspondent', 'credit_name': 'Jeannie Mai', 'tms_person_id': '550993'}, {'order': 20, 'role_name': None, 'role_type': 'Correspondent', 'cre
+dit_name': 'Lauren Sanchez', 'tms_person_id': '321609'}, {'order': 21, 'role_name': None, 'role_type': 'Correspondent', 'credit_name': 'Ben Lyons', 'tms_person_i
+d': '518602'}, {'order': 22, 'role_name': None, 'role_type': 'Host', 'credit_name': 'Dayna Devon', 'tms_person_id': '294293'}, {'order': 23, 'role_name': None, '
+role_type': 'Host', 'credit_name': 'Mark McGrath', 'tms_person_id': '331516'}]}}}]}]
+
+ipdb> 
+[{'vendor_channel': '19616', 'vendor_channel_day': '19616_2021-09-23', 'offerings': [{'vendor_channel': '19616', 'offering_id': '19616_2021-09-23T23:30:00Z_EP001
+152648565', 
+ 'last_modified': '2021-09-22T22:01:56Z', 'program': {'action': 'UPD', 'program_id': 'EP001152648565', 'rovi_id
+': None,  'credits': [{'order': 1, 'role_name': None,  'tms_person_id': '261959'}, {'order': 2, 'role_name':
+None, 'tms_person_id': '1280156'}, {'order': 3, 'role_name': None, 'role_type': 'Correspondent',
+  'tms_person_id': '1038375'}, {'order': 4, 'role_name': None, 'credit_name': 'Billy Bob Thornton', 'tms_person_id': '8418'}], 
+{'order': 23, 'role_name': None, 'tms_person_id': '331516'}]}}}]}]
+
+ipdb> 
+[{'vendor_channel': '19616', 'vendor_channel_day': '19616_2021-09-23', 'offerings': [{'vendor_channel': '19616', 'offering_id': '19616_2021-09-23T23:30:00Z_EP001
+r': 23, 'role_name': None, '
+role_type': 'Host', 'credit_name': 'Mark McGrath', 'tms_person_id': '331516'}]}}}]}]
+ipdb> json.loads(msg.value)

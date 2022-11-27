@@ -1,0 +1,106 @@
+
+
+..........................Docker info...............
+
+Get detailed information about docker installed on the system including the kernel version, number of containers and images, etc.
+geekflare@geekflare:/home/geekflare$ docker info
+
+.....................list running containers.............
+
+How would you list all of the containers currently running?
+Use the command: $ docker ps
+..................................
+
+.....................Starting Docker......................
+This command in docker starts the docker container with container id mentioned in the command.
+geekflare@geekflare:/home/geekflare$ docker start/restart/stop 09ca6feb6efc
+geekflare@geekflare:/home/geekflare$ docker ps
+What’s running?
+ps lists all the docker containers are running with container details.
+
+..............Removing container...............................
+Remove the docker container with container id mentioned in the command.
+
+geekflare@geekflare:/home/geekflare$ docker rm 9b6343d3b5a0
+Run the below command to check if the container got removed or not.
+
+..ps -a...  List all the docker containers running/exited/stopped with container details.
+geekflare@geekflare:/home/geekflare$ docker ps -a
+
+
+
+
+...............access docker container (exec)...................
+
+Access the docker container and run commands inside the container. I am accessing the apache server container in this example.
+
+geekflare@geekflare:/home/geekflare$ docker exec -it 09ca6feb6efc bash
+
+root@09ca6feb6efc:/usr/local/apache2# ls
+
+.........................docker cp.................
+Copy a file from a docker container to the local system.
+
+In this example, I am copying httpd.pid file inside a docker container with id 09ca6feb6efc to /home/geekflare/
+
+geekflare@geekflare:/home/geekflare$ sudo docker cp 09ca6feb6efc:/usr/local/apache2/logs/httpd.pid /home/geekflare/
+
+[sudo] password for geekflare:
+Run the command below to check if the file got copied or not.
+
+geekflare@geekflare:/home/geekflare$ ls
+
+Desktop  Documents  example  examples.desktop  httpd.pid  nginx_
+
+.......................To show running process in docker container.......................
+docker top
+
+.......................To check cpu, memory and network I/O usage...............
+docker stats
+..................Checking logs...................
+
+Show the logs of the docker container with contained id mentioned in the command.
+geekflare@geekflare:/home/geekflare$ docker logs 09ca6feb6efc
+
+....................docker image search.....................
+
+Search for a docker image on dockerhub with the name mentioned in the command.
+geekflare@geekflare:/home/geekflare$ docker search hadoop
+
+..............logging out.................
+Logging out from dockerhub.
+
+geekflare@geekflare:/home/geekflare$ docker logout
+.........................................................
+
+
+14. Show how you would create a container from an image.
+To create a container, you pull an image from the Docker repository and run it using the following command: 
+$ docker run -it -d <image_name>
+
+..............
+Some advanced commands include:
+
+Docker info. Displays system-wide information regarding the Docker installation
+Docker pull. Downloads an image
+Docker stats. Provides you with container information
+Docker images. Lists downloaded images
+
+.......................
+Any data stored in a container remains there unless you delete the container.
+................
+
+Which is the best method for removing a container:
+$ docker stop <coontainer_id>
+$ docker rm -f <container_id>
+........................
+ Can a container restart on its own?
+Since the default flag -reset is set to false, a container cannot restart by itself.
+..................
+24. How do Docker daemon and the Docker client communicate with each other?
+You use a combination of Rest API, socket.IO, and TCP to facilitate communication.
+
+............................
+25. Can you implement continuous development (CD) and continuous integration (CI) in Docker?
+Yes, you can. You can run Jenkins on Docker and use Docker Compose to run integration tests.
+...............

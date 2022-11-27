@@ -1,0 +1,463 @@
+leetcode.com
+https://github.com/PragatiVerma18/DRF-Interview-Prep
+https://www.interviewbit.com/django-interview-questions/
+
+8. What’s the difference between virtualization and containerization?
+Virtualization is an abstract version of a physical machine, while containerization is the abstract version of an application.
+
+
+cloud hosted repositories bitbucket or gitlab
+.........................................
+  
+............python simple questions.............
+>>> lis = ['a', 'd', 'd', 'c', 'a', 'b', 'b', 'a', 'c', 'd', 'e']
+>>> occurrence = {item: lis.count(item) for item in lis}
+>>> print(occurrence)
+{'a': 3, 'd': 3, 'c': 2, 'b': 2, 'e': 1}
+
+...................
+diff of 2 lists:   
+li1 = [10, 15, 20, 25, 30, 35, 40]
+li2 = [25, 40, 35]
+ 
+s = set(li2)
+temp3 = [x for x in li1 if x not in s]
+print(temp3)
+Output :  
+[10, 15, 20, 30]
+.................................................
+1)s="unITed STATES of amEriCa"
+2)print smallest/largest num from a list
+
+def smallest_num_in_list( list ):
+    min = list[ 0 ]
+    for a in list:
+        if a < min:
+            min = a
+    return min
+print(smallest_num_in_list([1, 2, -8, 0]))
+
+......................................
+
+ls = [{"india": 40, "code": "1001"}, {"pakistan": 20, "code": "1001"},
+ {"china": 40, "code": "1001","pakistan": 20},
+ {"india": 56, "code": "1002"},
+ {"pakistan": 14, "code": "1002"},
+ {"china": 30, "code": "1002"}]
+
+# [{"india": 40,"pakistan": 20,"china": 40, "code": "1001"},{"india": 56,"pakistan": 14,"china": 30, "code": "1002"}
+
+
+original list of tuples =
+ [('C#', 1), ('Go', 7), ('Basic', 8), ('Python', 60)]
+ 
+after sorting =
+ [('Basic', 8), ('C#', 1), ('Go', 7), ('Python', 60)]
+
+............................................
+
+
+
+
+On Tue, Jun 22, 2021 at 10:05 AM Amit Patil <amitpatilcs022@gmail.com> wrote:
+print("------------HCL----------------")
+"""
+s="NetScaler NS13.0: Build 71.44.nc, Date: Dec 26 2020, 11:31:14   (64-bit)"
+
+import re
+list_of_words = s.split(",")
+#print(list_of_words)
+
+res = re.findall("(\d+.\d+)+",list_of_words[0])
+
+digit = ""
+for i in res:
+    digit+=i+" "
+   
+print(digit)
+
+"""
+pair = {'a':{'ab':1},'az':{'b':{'df':33},'c':21,'d':45}}
+o/p : ['a', 'ab', 'az', 'b', 'df', 'c', 'd']
+
+"""
+delete key D1
+L1 = {"a": [1,2,3,4], "b": ["abc", "ads"], "c": {"A1": "B1" , "D1":"E1"}}
+L1 = {"a": [1,2,3,4], "b": ["abc", "ads"], "c": {"A1": "B1" , "D1":"E1"}}
+
+>>> del L1["c"]["D1"]
+>>> L1
+{'a': [1, 2, 3, 4], 'b': ['abc', 'ads'], 'c': {'A1': 'B1'}}
+"""
+
+"""
+url = http://abc.com username: abc, passwd: xyz
+{ "errorcode": 0, "message": "Done", "operation": "get", "resourceType": "mps",
+ "username": "nsroot", "tenant_name": "Owner", "tenant_id": "51f93b52-8c7e-462e-b10f-c8ff0de54aad", "resourceName": "",
+ "mps": [ { "maps_apikey": "", "build_number_short": "13.0: Build 79.64" } ] }
+
+def test_method(request)
+    response = requests.get("http://abc.com",auth=('username':'abc',password:'xyz'))
+    response.json()['results']['mps'][0]["build_number_short"]
+
+d={"errorcode": 0, "message": "Done", "operation": "get", "resourceType": "mps","username": "nsroot", "tenant_name": "Owner", "tenant_id": "51f93b52-8c7e-462e-b10f-c8ff0de54aad", "resourceName": "","mps": [ { "maps_apikey": "", "build_number_short": "13.0: Build 79.64" } ] }
+
+
+re for exact IP pattern matching
+import re
+
+print("valid ip address")
+s="100.257.300.400"
+s="[1-255.1-255]"
+
+res = re.search('(\d[0-255].\d[0-255].\d[0-255].\d[0-255])',s)
+print(res)
+
+
+ 
+ """
+ 
+ print("------------------------------")
+ 
+ """
+ITC infotech:
+1)Explain REST API architecture
+2)y ppl moving from onprem to services       
+3)what is pipeline
+
+d={"a":{1:10,2:20,3:30,4:40,5:50,6:60,7:70,8:80,9:90,10:100}",}
+
+my_dict = {'a' : {'1' : { 'x' : 'abc', ... 10 items}, ... 10 items}, ... 10 items}
+
+for k in my_dict.keys():
+    if isinstance(my_dict[k],dict):
+        for k in my_dict.keys():
+            print(k,my_dict[k])
+    else:
+        print(k,my_dict[k])
+       
+try:
+    res=3/0
+except Exception as e:
+    print(e)
+   
+"""
+
+print("------------------------------")
+"""
+Sling Media client Insurance company  
+a={1,2,3,4}
+res = a.split(":")[1]
+ print(res)
+import re
+a="1:02:30 AM"
+
+amp.txt
+
+all_matches = []
+import re
+with open("amp.txt") as fh:
+lines=fh.readlines()
+for i in lines:
+res = re.findall("(\d{1,2}:\d{1,2}:\d{1,2} \w+)+",i)
+all_matches.append(res)
+
+print(all_matches)
+
+..................................
+print the compination of 2 nums such that their sum=9
+o/p: (1,8),(3,6)
+a = [1,3,4,6,2,7,8,9,5]
+
+num=9
+pair_list=[]
+for i in a:
+expected_val = num-i
+if expected_val in a:
+print(sorted(pair_list.append([i,expected_val])))
+"""
+
+print("----Happiest minds-----")
+
+"""
+x=[1,2,3,4]
+y=['a','b','c','d']
+z=[True,False,True,False]
+
+res=[(x[i],y[i],z[i])for i in range(len(x))]
+
+print(res)
+#[(1, 'a', True), (2, 'b', False), (3, 'c', True), (4, 'd', False)]
+
+print("--or zip implementation--")
+
+#Use indexes to access same-indexes items:
+
+def zippy(x, y,z):
+    zipper = []
+    for i in range(len(x)):
+        zipper.append((x[i], y[i],z[i]))
+    print("without list comprehension",zipper)
+    return zipper
+   
+zippy(x,y,z)
+"""
+
+print("---Happiest minds---client---MacAfee---")
+"""
+Convert a given string to title case "unITed STATES of amEriCa" -> "United States Of America"
+"""
+print("---------solution---------")
+"""
+s="unITed STATES of amEriCa"
+s_list=s.split()
+res = [i.lower() for i in s_list]
+s_res=""
+for i in res:
+    s_res+=i..upper+" "
+print(s_res)
+"""
+print("-------Question 1-------------")
+"""
+PID USER PR NI VIRT RES SHR S %CPU %MEM TIME+ COMMAND
+16912 2222 20 0 54036 7840 5812 S 2.6 9.1 275:55.53 nginx
+16923 2222 20 0 53596 7684 5812 R 2.6 2.1 317:19.27 nginx
+15899 2222 20 0 53392 5148 3552 S 2.3 0.1 298:23.12 nginx
+15905 2222 20 0 53392 5152 3552 R 2.3 10.1 300:36.53 nginx
+15910 2222 20 0 53296 4908 3360 S 2.0 17.1 309:14.56 nginx
+16896 2222 20 0 53892 7044 5172 R 2.0 0.1 293:29.54 nginx
+16904 2222 20 0 53964 7112 5044 S 2.0 0.1 285:08.83 nginx
+
+expected : print highest memory utilization, and the corresponding PID.
+"""
+print("----solution------")
+"""
+file_parse_dict={}
+with open("C:/Users/basav/Desktop/memory.txt") as f:
+    lines = f.readlines()
+    file_keys=f.readlines()[0].split   #[PID USER PR NI VIRT RES SHR S %CPU %MEM TIME+ COMMAND]
+    print(file_keys)  
+    for i in lines[1:]:
+        file_parse_values=i.split()    #[16912 2222 20 0 54036 7840 5812 S 2.6 9.1 275:55.53 nginx]
+            dict_res = {file_keys[j]:file_parse_values[j] for j in len(file_parse_values)}:        
+"""
+
+
+
+xmltodict.parse
+
+reverse 
+a = [3,5,6,8,9,3,6]
+
+
+
+
+
+.........................dict........................
+This will return my_dict[key] if key exists in the dictionary, and None otherwise. 
+If the second parameter is not specified (i.e. my_dict.pop('key')) and key does not exist, a KeyError is raised.
+my_dict.pop('key', None)
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+.......................................
+
+
+
+CREATE OR REPLACE FUNCTION public.tmsid_match_report()
+ RETURNS TABLE(content_type text, channel_match_status text, offerings_matched numeric, offerings_unmatched numeric, offerings_total numeric, match_percentage numeric)
+ LANGUAGE plpgsql
+
+
+....................................................................
+
+http://p-gp2-gitlab-1.imovetv.com/catalog/gracenote-postgres/-/blob/master/util_functions/tmsid_match_report.sql
+
+
+CREATE OR REPLACE FUNCTION public.tmsid_match_report()
+ RETURNS TABLE(content_type text, channel_match_status text, offerings_matched numeric, offerings_unmatched numeric, offerings_total numeric, match_percentage numeric)
+ LANGUAGE plpgsql
+AS $function$
+Begin
+return query
+
+
+/* Match Percentage Report By Content Type and Channel Match Status */
+select 
+	x.content_type, x.channel_match_status, 
+	sum(matched_offerings) as offerings_matched, sum(unmatched_offerings) as offerings_unmatched, sum(total_offerings) as offerings_total,
+	sum(matched_offerings)*100.00/sum(total_offerings) as match_percentage
+from
+	(
+	select 
+		counts.content_type, counts.channel_source_id, 
+		(case when channel_map.gracenote is not null then 'matched' else 'unmatched' end) as channel_match_status, 
+		matched_offerings, unmatched_offerings, total_offerings, matched_offerings*100.0/total_offerings as match_percentage
+	from
+		(
+		select 
+			o."type" as content_type, o.channel_source_id, 
+			count(case when tms_id is not null then 1 end) matched_offerings, 
+			count(case when tms_id is  null then 1 end) unmatched_offerings, 
+			count (*) total_offerings from "catalog".offering o
+		group by o."type", o.channel_source_id 
+		) as counts
+		left  join 
+		(
+		select distinct cm.channelsource_id, cm.gracenote 
+		from
+		"catalog".channel_mapping cm 
+		) as channel_map
+	on channel_map.channelsource_id = counts.channel_source_id
+	) as x
+group by x.content_type, x.channel_match_status
+
+;
+
+end;
+$function$
+;
+.........................................interviewbit............................................
+https://www.interviewbit.com/python-interview-questions/#built-in-data-types-in-python
+
+In Python, the assignment statement (= operator) does not copy objects. 
+Instead, it creates a binding between the existing object and the target variable name.
+ 
+To create copies of an object in Python, we need to use the copy module. 
+Moreover, there are two ways of creating copies for the given object using the copy module -
+
+Shallow Copy is a bit-wise copy of an object. 
+The copied object created has an exact copy of the values in the original object. 
+If either of the values is a reference to other objects, just the reference addresses for the same are copied.
+
+Deep Copy copies all values recursively from source to target object, 
+i.e. it even duplicates the objects referenced by the source object.
+
+from copy import copy, deepcopy
+list_1 = [1, 2, [3, 5], 4]
+## shallow copy
+list_2 = copy(list_1) 
+list_2[3] = 7
+list_2[2].append(6)
+list_2    # output => [1, 2, [3, 5, 6], 7]
+list_1    # output => [1, 2, [3, 5, 6], 4]
+## deep copy
+list_3 = deepcopy(list_1)
+list_3[3] = 8
+list_3[2].append(7)
+list_3    # output => [1, 2, [3, 5, 6, 7], 8]
+list_1    # output => [1, 2, [3, 5, 6], 4]
+
+......................................................
+
+28. What are generators in Python?
+Generators are functions that return an iterable collection of items, one at a time, in a set manner. 
+Generators, in general, are used to create iterators with a different approach.
+ 
+They employ the use of yield keyword rather than return to return a generator object.
+Let's try and build a generator for fibonacci numbers -
+
+## generate fibonacci numbers upto n
+def fib(n):
+   p, q = 0, 1
+   while(p < n):
+       yield p
+       p, q = q, p + q
+x = fib(10)    # create generator object 
+ 
+## iterating using __next__(), for Python2, use next()
+x.__next__()    # output => 0
+x.__next__()    # output => 1
+x.__next__()    # output => 1
+x.__next__()    # output => 2
+x.__next__()    # output => 3
+x.__next__()    # output => 5
+x.__next__()    # output => 8
+x.__next__()    # error
+ 
+## iterating using loop
+for i in fib(10):
+   print(i)    # output => 0 1 1 2 3 5 8
+................................................
+
+33. How are arguments passed by value or by reference in python?
+
+
+29. What is PYTHONPATH in Python?
+
+26. What is the difference between xrange and range in Python?
+
+.....................lambda..........................
+List = [[2,3,4],[1, 4, 16, 64],[3, 6, 9, 12]]
+ 
+# Sort each sublist
+sortList = lambda x: (sorted(i) for i in x)
+ 
+# Get the second largest element
+secondLargest = lambda x, f : [y[len(y)-2] for y in f(x)]
+res = secondLargest(List, sortList)
+ 
+print(res)
+
+..................filter...........
+
+# Python code to illustrate
+# filter() with lambda()
+li = [5, 7, 22, 97, 54, 62, 77, 23, 73, 61]
+ 
+final_list = list(filter(lambda x: (x%2 != 0) , li))
+print(final_list)
+
+..............map...........
+
+# Python program to demonstrate
+# use of lambda() function
+# with map() function
+animals = ['dog', 'cat', 'parrot', 'rabbit']
+ 
+# here we intend to change all animal names
+# to upper case and return the same
+uppered_animals = list(map(lambda animal: str.upper(animal), animals))
+ 
+print(uppered_animals)
+
+Output
+['DOG', 'CAT', 'PARROT', 'RABBIT']
+
+................reduce...............
+
+# Python code to illustrate
+# reduce() with lambda()
+# to get sum of a list
+ 
+from functools import reduce
+li = [5, 8, 10, 20, 50, 100]
+sum = reduce((lambda x, y: x + y), li)
+print (sum)
+
+
+
+
+
+.........................Java...........................
+https://www.softwaretestinghelp.com/java-coding-interview-programs/
+
+Write a Java Program for the Fibonacci series.

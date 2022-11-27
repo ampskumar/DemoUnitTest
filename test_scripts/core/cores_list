@@ -1,0 +1,35 @@
+Targetting samsung:
+
+core py:
+1)generators
+2)local, global
+3)shallow copy dep copy in python
+
+...............oops....................:
+1)super()
+Parameters of super() in Python:
+The super function in Python takes two optional parameters:
+ClassName: This is the name of the subclass.
+ClassObject: This is an object of the subclass.
+class ClassName(ParentClass):
+    def method(self, arg):
+       super([ClassName], [self]).method(arg)
+
+or other syntax:
+This super() function accepts two parameters in the multiple inheritance.
+Super(Immediateclassname,currentobject)
+
+The benefits of using a super function are:
+
+No need to specify the parent class name.
+Helps in implementing modularity (isolating changes) and code reusability.
+
+2)@classmethod()
+
+Very Good in:
+
+1)python regular expressions
+2)User defined exceptions
+3)lists,tuples,dictionary
+4)File operations
+5)Decorators

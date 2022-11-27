@@ -1,0 +1,492 @@
+netstat -ano | find "8080" | find "LISTEN" tasklist /fi "PID eq "8080"
+https://www.softwaretestinghelp.com/pytest-tutorial/ (first focus)
+
+ssl, man in the middle attack
+https://www.youtube.com/watch?v=IN4qt-9bMiE(pytest and aws 3hr with cicd) very good
+
+https://www.softwaretestinghelp.com/pytest-tutorial/  (v good to start with)
+
+..........................api.......................
+https://github.com/topics/api-testing-python (link to all)
+https://github.com/manuperera81/Python-API-Automation/tree/master/tests (sample test frame)
+https://github.com/automationhacks/course-api-framework-python/tree/master/clients/people
+https://github.com/nirob2017/pyTestFrame
+https://github.com/topics/pytest-framework
+https://github.com/manuperera81/Python-API-Automation/tree/master/clients
+https://github.com/canyoupleasecreateanaccount/pycamel
+https://github.com/manuperera81/Python-API-Automation/tree/master/tests
+
+..............................sonarqube................................
+https://cloudacademy.com/lab/create-jenkins-cicd-pipeline-sonarqube-integration/
+
+
+--------------------- pytest reporting ----------------
+
+https://python.plainenglish.io/create-your-customized-html-report-in-pytest-9c6b521b7e99
+
+...................................................................
+run bat file in windows c
+http://localhost:9000/
+sonarqube :  admin/amps@123
+
+http://localhost:8080/
+jenkins : Amps/amps@123
+
+https://github.com/ampskumar/DemoUnitTest 
+github : ampskumar9@gmail.com/Firstscm@123
+
+.............................start of pytest-jenkins-sonarqube pipeline set up.................
+$ python -m venv pytest_demo_env
+
+Admin@DESKTOP-00N8CGQ MINGW64 /c/envs/pytest_demo_env/Scripts/activate
+$
+........................
+Admin@DESKTOP-00N8CGQ MINGW64 /c/envs
+$ /c/envs/pytest_demo_env/Scripts/activate
+
+call C:\envs\pytest_demo_env\Scripts\activate.bat
+
+Admin@DESKTOP-00N8CGQ MINGW64 /c/pytest_workspace/DemoUnitTests (master)
+$ git push -u  https://username(ampskumar)password(ur_pswd)@github.com/ampskumar/DemoUnitTest.git master
+
+this is not the correct way,you can do ssh keys for now its ok
+...................install jdk11 and set path in windows...............
+C:\Users\Admin>java -version
+openjdk version "11.0.16" 2022-07-19
+
+C:\Users\Admin>for %i in (java.exe) do @echo.   %~$PATH:i
+C:\Program Files\OpenJDK\jdk-11.0.16.8-hotspot\bin\java.exe
+
+............set jdk path in system env variable.................
+set name: JAVA_HOME and value as C:\Program Files\OpenJDK\jdk-11.0.16.8-hotspot
+
+..........install jenkins..............
+localhost:8080
+Admin@DESKTOP-00N8CGQ MINGW64 /
+$ vi C:/ProgramData/Jenkins/.jenkins/secrets/initialAdminPassword
+
+set credentials:
+Amps/amps@123/amitpatil@mirafra.com
+
+...........creating job and building pipeline............
+
+create job/Pipeline:
+https://www.youtube.com/watch?v=-wiftS_-UyI
+
+pipeline script: takes groovy syntax code can b written in box itself
+pipeline script from scm(github,bitbucket), if we select we will have to make a jenkins file using notepad, 
+upload to github, jenkins will fetch the file and build the project, she has also made a vid on uploading.
+
+for freestyle:
+https://www.youtube.com/watch?v=iotloCXtIzY
+
+
+....Excellent reading material for pipeline....
+https://livebook.manning.com/book/pipeline-as-code/chapter-8/v-3/20
+
+for docker:
+https://medium.com/swlh/build-your-first-automated-test-integration-with-pytest-jenkins-and-docker-ec738ec43955
+
+..............Sonarqube integration with Jenkins..........
+1)https://medium.com/@samuelhutama/installing-sonarqube-for-code-analysis-58a5cd2e40b7(for install in windows)
+
+2)Jenkins Sonarqube integration using maven | End to end CI/CD project using jenkins - 03(settings in jenkins & github configs)
+https://www.youtube.com/watch?v=gsjJnByBfpM&t=3s(webhooks i.e constraints like 60% pass)
+
+...sonarqube as conainer....
+https://www.opensourceforu.com/2021/08/static-code-analysis-using-sonarqube-and-jenkins/ (very infomative for jenkins,github,sonarqube)
+
+https://progressstory.com/tech/step-by-step-configuration-of-sonarqube-with-jenkins-for-python/
+
+selected locally:
+Analyze "test_jenkins_pipeline": sqp_ec293caef3601c15c7f6bad703cf5b02c2b14da8
+
+Configure System
+Home directory
+?
+By default, Jenkins stores all of its data in this directory on the file system
+C:\ProgramData\Jenkins\.jenkins
+
+......
+Execute the Scanner:
+Running a SonarQube analysis is straighforward. You just need to execute the following commands in your project's folder.
+sonar-scanner.bat -D"sonar.projectKey=test_jenkins_pipeline" -D"sonar.sources=." -D"sonar.host.url=http://localhost:9000" -D"sonar.login=sqp_ec293caef3601c15c7f6bad703cf5b02c2b14da8"
+
+https://medium.com/@amitvermaa93/jenkins-sonarqube-integration-129f5c49c4ca:
+
+Flow : As soon as developer commits the code to GitHub, Jenkins will fetch/pull the code from repository and will perform static code analysis
+ with help of Sonar Scanner and send analysis report to SonarQube Server then it will automatically build the project code.
+
+abt sonarQube @ SonarScanner:
+https://stackoverflow.com/questions/65135706/is-it-possible-to-run-the-sonarqube-scanner-without-installing-the-sonarqube
+
+.............................end of pytest-jenkins-sonarqube pipeline set up.................
+
+
+...........................................................
+https://python-academy.com/courses/python_course_testing.html (topics list)
+The basics: Fundamental pytest features, test discovery and plain asserts
+
+Configuration: Typical directory structure, configs, options
+Marks: Marking/grouping tests, skipping tests
+Parametrization: Running tests against sets of input/output data
+Fixtures: Providing test data, setting up objects, modularity
+Built-in fixtures: Temporary files, patching, capturing output, test information
+Fixtures advanced: Caching, cleanup/teardown, implicit fixtures, parametrizing
+Migrating to pytest: Running existing testsuites, incremental rewriting, tooling
+Mocking: Dealing with dependencies which are in our way, alternatives
+Plugin tour: Coverage, distributed testing, output improvements, alternative test syntax,
+testing C libraries, plugin overview
+..............
+
+Sharing Fixtures Through conftest.py
+You can put fixtures into individual test files,
+ but to share fixtures among multiple test files, 
+you need to use a conftest.py file somewhere centrally located for all of the tests.
+ For the Tasks project, all of the fixtures will be in tasks_proj/tests/conftest.py.
+
+From there, the fixtures can be shared by any test. You can put fixtures in individual test files 
+if you want the fixture to only be used by tests in that file. 
+Likewise, you can have other conftest.py files in subdirectories of the top tests directory. 
+If you do, fixtures defined in these lower-level conftest.py files will be available to tests in that directory 
+and subdirectories.
+So far, however, the fixtures in the Tasks project are intended ...
+
+
+..................................................................
+https://www.oreilly.com/library/view/python-testing-with/9781680502848/
+
+Table of contents
+ Acknowledgments
+ Preface
+What Is pytest?
+Learn pytest While Testing an Example Application
+How This Book Is Organized
+What You Need to Know
+Example Code and Online Resources
+1. Getting Started with pytest
+Getting pytest
+Running pytest
+Running Only One Test
+Using Options
+Exercises
+What’s Next
+2. Writing Test Functions
+Testing a Package
+Using assert Statements
+Expecting Exceptions
+Marking Test Functions
+Skipping Tests
+Marking Tests as Expecting to Fail
+Running a Subset of Tests
+Parametrized Testing
+Exercises
+What’s Next
+3. pytest Fixtures
+Sharing Fixtures Through conftest.py
+Using Fixtures for Setup and Teardown
+Tracing Fixture Execution with –setup-show
+Using Fixtures for Test Data
+Using Multiple Fixtures
+Specifying Fixture Scope
+Specifying Fixtures with usefixtures
+Using autouse for Fixtures That Always Get Used
+Renaming Fixtures
+Parametrizing Fixtures
+Exercises
+What’s Next
+4. Builtin Fixtures
+Using tmpdir and tmpdir_factory
+Using pytestconfig
+Using cache
+Using capsys
+Using monkeypatch
+Using doctest_namespace
+Using recwarn
+Exercises
+What’s Next
+5. Plugins
+Finding Plugins
+Installing Plugins
+Writing Your Own Plugins
+Creating an Installable Plugin
+Testing Plugins
+Creating a Distribution
+Exercises
+What’s Next
+6. Configuration
+Understanding pytest Configuration Files
+Changing the Default Command-Line Options
+Registering Markers to Avoid Marker Typos
+Requiring a Minimum pytest Version
+Stopping pytest from Looking in the Wrong Places
+Specifying Test Directory Locations
+Changing Test Discovery Rules
+Disallowing XPASS
+Avoiding Filename Collisions
+Exercises
+What’s Next
+7. Using pytest with Other Tools
+pdb: Debugging Test Failures
+Coverage.py: Determining How Much Code Is Tested
+mock: Swapping Out Part of the System
+tox: Testing Multiple Configurations
+Jenkins CI: Automating Your Automated Tests
+unittest: Running Legacy Tests with pytest
+Exercises
+What’s Next
+A1. Virtual Environments
+A2. pip
+A3. Plugin Sampler Pack
+Plugins That Change the Normal Test Run Flow
+Plugins That Alter or Enhance Output
+Plugins for Static Analysis
+Plugins for Web Development
+A4. Packaging and Distributing Python Projects
+Creating an Installable Module
+Creating an Installable Package
+Creating a Source Distribution and Wheel
+Creating a PyPI-Installable Package
+A5. xUnit Fixtures
+Syntax of xUnit Fixtures
+Mixing pytest Fixtures and xUnit Fixtures
+Limitations of xUnit Fixtures
+Show and hide more
+
+
+.......................Pyenv Pipeline.........................
+ A Jenkins plugin that provides a way to execute sh and bat Pipeline DSL commands within a specified Python virtualenv.
+
+Setup
+Install Pyenv Pipeline
+(Optional) Install ShiningPanda
+
+............................pipeline script 1.............
+
+
+
+pipeline {
+    agent any
+
+    stages {
+        stage('Checkout') {
+            steps {
+                checkout([$class: 'GitSCM', branches: [[name: '*/master']], extensions: [], userRemoteConfigs: [[url: 'https://github.com/ampskumar/DemoUnitTest.git']]])
+            }
+        }
+        stage('Build'){
+            steps{
+                git 'https://github.com/ampskumar/DemoUnitTest.git'
+                bat '''
+                echo 'BEFORE ACTIVATION'
+                call C:\\envs\\pytest_demo_env\\Scripts\\activate.bat
+                echo 'AFTER ACTIVATION'
+                call pip install -r requirements.txt
+                call pip freeze > zh.txt
+                cd SampleTests
+                call pytest
+                '''
+            }
+        }
+        stage('Test'){
+            steps{
+                echo 'this job is tested'
+            }
+        }
+    }
+}
+..................pipeline script 2..............
+pipeline {
+    agent any
+
+    stages {
+        stage('Checkout') {
+            steps {
+                checkout([$class: 'GitSCM', branches: [[name: '*/master']], extensions: [], userRemoteConfigs: [[url: 'https://github.com/ampskumar/DemoUnitTest.git']]])
+            }
+        }
+        stage('Build'){
+            steps{
+                git 'https://github.com/ampskumar/DemoUnitTest.git'
+                bat '''
+                call C:\\envs\\pytest_demo_env\\Scripts\\activate.bat
+                call pip install -r requirements.txt
+                call pytest SampleTests --junitxml=./xmlReport/output.xml
+                echo 'deactivating'
+                deactivate
+                '''
+            }
+        }
+        stage('Test'){
+            steps{
+                echo 'this job is tested'
+            }
+        }
+    }
+}
+......................send mail via pipeline on job success............
+https://medium.com/@gustavo.guss/how-to-do-post-build-in-jenkins-pipeline-d1e7233909b8
+
+after stages{} block include following:
+  post {
+    success {
+      mail to: team@example.com, subject: ‘The Pipeline success :(‘
+    }
+  }
+
+Ex:
+To generate xml report after post build
+    post {
+      always {
+        junit '**/report/junit/*.xml'
+      }
+   }
+copied from stackflow and included in my batch script and the result is folowing,
+output:
+Recording test results
+No test report files were found. Configuration error?
+Error when executing always post condition:
+
+sol: 
+following is perfectly working(observe the path of the report generated in jenkins file,below is the path)
+C:\ProgramData\Jenkins\.jenkins\workspace\demo-tests\SampleTests\xmlReport\output.xml
+
+    post {
+      always {
+        junit '**/xmlReport/*.xml'
+      }
+   }
+
+--------------3 latest pipeline script............
+ 
+
+........For pipeline script snippets for SonarQube...............
+
+stage('Scan'){
+     steps{
+	    withSonarQubeEnv(installationName: 'sonarqube_961'){
+		sonar-scanner.bat -D"sonar.projectKey=test_jenkins_pipeline" -D"sonar.sources=." -D"sonar.host.url=http://localhost:9000" -D"sonar.login=sqp_ec293caef3601c15c7f6bad703cf5b02c2b14da8"
+	  }
+     }
+}
+stage('Quality Gate'){
+     steps{
+	   timeout(time: 2, unit: 'MINUTES'){
+			waitForQualityGate abortPipeline: true
+		}
+	}
+}
+...................................
+https://www.youtube.com/watch?v=g3g3T6_abUU
+
+
+...................
+
+            stage('Scan'){
+                steps{
+    	               withSonarQubeEnv(installationName: 'sonarqube_961'){
+    		             sonar-scanner.bat -D"sonar.projectKey=test_jenkins_pipeline" -D"sonar.sources=." -D"sonar.host.url=http://localhost:9000" -D"sonar.login=sqp_ec293caef3601c15c7f6bad703cf5b02c2b14da8"
+    	               }
+                }
+            }
+
+
+..........https://medium.com/@rosaniline/setup-sonarqube-with-jenkins-declarative-pipeline-75bccdc9075f..........
+stage('Sonarqube') {
+    environment {
+        scannerHome = tool 'Scanner1'
+    }
+    steps {
+        withSonarQubeEnv('sonarqube_961') {
+            sh "${scannerHome}/bin/sonar-scanner"
+        }
+    }
+}
+
+....
+            stage('Sonarqube') {
+                environment {
+                    scannerHome = tool 'Scanner1'
+                }
+                steps {
+                    withSonarQubeEnv('sonarqube_961') {
+                        sh "${scannerHome}/bin/sonar-scanner"
+                    }
+                }
+            }
+
+..............
+
+......
+            stage('Scan'){
+                steps{withSonarQubeEnv('sonarqube_961'){
+                    sonar-scanner.bat -D"sonar.projectKey=test_jenkins_pipeline" -D"sonar.sources=." -D"sonar.host.url=http://localhost:9000" -D"sonar.login=sqp_ec293caef3601c15c7f6bad703cf5b02c2b14da8"}}
+            }
+
+.................
+/c/envs/pytest_demo_env/Scripts/activate
+
+By default, Jenkins stores all of its data in this directory on the file system
+C:\ProgramData\Jenkins\.jenkins
+
+Admin@DESKTOP-00N8CGQ MINGW64 /c/ProgramData/Jenkins/.jenkins
+
+sonar-scanner.bat -h
+
+........................................latest final pipeline Nov.....................
+pipeline {
+    agent any
+
+    stages {
+            stage('Checkout') {
+                steps {
+                    checkout([$class: 'GitSCM', branches: [[name: '*/master']], extensions: [], userRemoteConfigs: [[url: 'https://github.com/ampskumar/DemoUnitTest.git']]])
+                }
+            }
+            stage('Build'){
+                steps{
+                    git 'https://github.com/ampskumar/DemoUnitTest.git'
+                    bat '''
+                    call C:\\envs\\pytest_demo_env\\Scripts\\activate.bat
+                    call pip install -r requirements.txt
+                    call pytest SampleTests --junitxml=./xmlReport/output.xml
+                    echo 'deactivating'
+                    deactivate
+                    '''
+                }
+            }
+            stage('Test'){
+                steps{
+                    echo 'this job is tested'
+                }
+            }
+
+
+stage('Sonarqube') {
+    environment {
+        scannerHome = tool 'Scanner1'
+    }
+    steps {
+        withSonarQubeEnv('sonarqube_961') {
+            script{
+            bat 
+            """
+            call ${scannerHome}\\bin\\sonar-scanner.bat -D"sonar.projectKey=test_jenkins_pipeline" -D"sonar.sources=." -D"sonar.host.url=http://localhost:9000" -D"sonar.login=sqp_ec293caef3601c15c7f6bad703cf5b02c2b14da8"
+            """
+                
+            }
+        }
+    }
+}
+            
+            
+            
+    }
+    post {
+      always {
+        junit '**/xmlReport/*.xml'
+      }
+   }
+}
+
+
